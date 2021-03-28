@@ -1,34 +1,41 @@
-import React, { useState, useEffect }from 'react'
-import axios from './axios';
+import React, { useState, useEffect } from "react";
+import axios from "./axios";
 
-function RowRetry({title, fetchURL}) {
-    const [movies, setMovies] = useState([]);
+import './Row.css'
 
-    useEffect(() => {
-        async function fetchData(){
-            const request = await axios.get(fetchURL);
-            //console.log(request.data.results);
-            setMovies(request.data.results);
-            return request;
-        }
-        fetchData();
-    }, [fetchURL]);
+const base_url = "https://image.tmdb.org/t/p/original/";
 
-    console.log(movies);
+function RowRetry({ title, fetchURL }) {
+  const [movies, setMovies] = useState([]);
 
-    return (
-        <div className="row">
-            <h2>{title}</h2>
+  useEffect(() => {
+    async function fetchData() {
+      const request = await axios.get(fetchURL);
+      //console.log(request.data.results);
+      setMovies(request.data.results);
+      return request;
+    }
+    fetchData();
+  }, [fetchURL]);
 
-            <div className="row_posters">
-                {movies.map(movie =>(
-                    <img src={movie.poster_path} alt={movie.name}/>
-                ))}
-                
-            </div>
-            
-        </div>
-    )
+  console.log(movies);
+
+  return (
+    <div className="row">
+      <h2>{title}</h2>
+
+      <div className="row_posters">
+        {movies.map((movie) => (
+          <img
+            key={movie.id}
+            className="row_poster"
+            src={`${base_url}${movie.poster_path}`}
+            alt={movie.name}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
 
-export default RowRetry
+export default RowRetry;
