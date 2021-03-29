@@ -1,16 +1,15 @@
 import React from 'react'
 import './App.css';
-//import Row  from './Row';
-//1:27:48
 import requests from "./requests"
 
 import RowRetry from './RowRetry'
+import Banner from './Banner'
 
 function App() {
   return (
     <div className="App">
       {/* Nav bar componant */}
-      {/* Banner Componant */}
+      <Banner/>
       <RowRetry title="NETFLIX ORIGINALS" fetchURL={requests.fetchNetlfixOriginals} isLargeRow/>
       <RowRetry title="Trending Now" fetchURL={requests.fetchTrending}/>
       <RowRetry title="Top Rated" fetchURL={requests.fetchTopRated}/>
