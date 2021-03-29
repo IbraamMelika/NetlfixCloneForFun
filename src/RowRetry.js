@@ -5,7 +5,7 @@ import './Row.css'
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function RowRetry({ title, fetchURL }) {
+function RowRetry({ title, fetchURL, isLargeRow }) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -28,8 +28,8 @@ function RowRetry({ title, fetchURL }) {
         {movies.map((movie) => (
           <img
             key={movie.id}
-            className="row_poster"
-            src={`${base_url}${movie.poster_path}`}
+            className={`row_poster ${isLargeRow && "row_posterLarge"}`} //if its a isLargeRow className is "row_posterLarge"
+            src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} //if it has isLargeRow use movie.backdrop_path else use the other one
             alt={movie.name}
           />
         ))}
